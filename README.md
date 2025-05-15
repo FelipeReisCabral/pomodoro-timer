@@ -12,7 +12,7 @@ Diante dessa necessidade, esse projeto foi idealizado também para praticar conc
 - 🔔 Adicionar uma notificação simples ao final dos ciclos
 - 🎨 Criar uma interface inicial com HTML e CSS
 
-*Atualmente o projeto está na fase de planejamento e organização das sprints.*
+*Atualmente o projeto está na fase de desenvolvimento da interface minima.*
 
 ---
 
