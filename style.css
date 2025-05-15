@@ -1,0 +1,54 @@
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  margin: 0vh;
+  height: 100vh;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+}
+div#body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.507);
+  text-align: center;
+  background-color: rgb(186, 190, 190);
+  height: 40vh;
+  width: 40vh;
+}
+
+div#timer {
+  font-family: "Orbitron", sans-serif;
+  font-size: x-large;
+}
+
+button {
+  width: 60px;
+  height: 60px;
+  background-size: 60%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+#start {
+  background-image: url("img/start.png");
+}
+
+#pause {
+  background-image: url("img/pause.png");
+}
+
+#reset {
+  background-image: url("img/reset.png");
+}
+
+#button :hover {
+  background-color: black;
+}
