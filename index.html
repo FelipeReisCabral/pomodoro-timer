@@ -13,13 +13,14 @@
   <body>
     <div id="body">
       <div id="title"><h1>Pomodoro Timer</h1></div>
-      <div id="timer"><h1>00:00</h1></div>
+      <div id="timer"><h1 id="contador">00:25:00</h1></div>
       <div id="button">
-        <button type="button" id="start"></button>
-        <button type="button" id="pause"></button>
-        <button type="button" id="reset"></button>
+        <button onclick="iniciar()" type="button" id="start"></button>
+        <button onclick="pausar()" type="button" id="pause"></button>
+        <button onclick="reset()" type="button" id="reset"></button>
       </div>
       <div id="period"><h2>ciclo: 0</h2></div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>
