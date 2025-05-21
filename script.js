@@ -5,6 +5,8 @@ let periodo = "foco";
 let tempo = foco * 60;
 
 function iniciar() {
+  if (intervalo) return;
+
   intervalo = setInterval(function () {
     if (tempo > 0) {
       tempo--;
