@@ -6,23 +6,31 @@ Diante dessa necessidade, esse projeto foi idealizado também para praticar conc
 
 ---
 
-## ✅ Objetivo da primeira entrega (MVP)
+## ✅ Funcionalidades atuais
 
-- ⏲️ Implementar um timer funcional com JavaScript
-- 🔔 Adicionar uma notificação simples ao final dos ciclos
-- 🎨 Criar uma interface inicial com HTML e CSS
-
-*Atualmente o projeto está na fase de desenvolvimento da interface minima.*
+- ⏱️ Timer com tempo de foco (25 min) e pausa (5 min)
+- 🔁 Alternância automática entre ciclos de foco e pausa
+- 🔔 Alerta sonoro ao final de cada período
+- 🔄 Exibição do ciclo atual e modo ativo (FOCO ou PAUSA)
+- 🎨 Interface visual responsiva e agradável
+- ♿️ Melhorias de acessibilidade com foco em conformidade com WCAG
+- 📱 Compatível com dispositivos móveis
 
 ---
 
-## 🚧 Próximas melhorias
+## 🧪 Exemplo da Interface
 
+![Preview do Pomodoro Timer](./img/readme-preview.png)
+
+---
+
+## 🚧 Próximas melhorias (Backlog)
+
+- 📊 Estatísticas de produtividade por sessão e por dia
+- 🌙 Modo escuro (Dark Mode)
 - 🔄 Contador de ciclos completados
-- 🗂️ Integração com sistema Leitner para revisão espaçada
-- 📊 Painel com estatísticas de produtividade
-- 🎨 Modo escuro (dark mode)
-- 🔗 Versão online hospedada para acesso público
+- 📚 Integração com Sistema Leitner para revisão espaçada
+- ☁️ Hospedagem online (GitHub Pages ou Vercel)
 
 ---
 
