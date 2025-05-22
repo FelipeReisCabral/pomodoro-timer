@@ -15,9 +15,33 @@
       <div id="title"><h1>Pomodoro Timer</h1></div>
       <div id="timer"><h1 id="contador">00:25:00</h1></div>
       <div id="button">
-        <button onclick="iniciar()" type="button" id="start"></button>
-        <button onclick="pausar()" type="button" id="pause"></button>
-        <button onclick="reset()" type="button" id="reset"></button>
+        <button
+          onclick="iniciar()"
+          type="button"
+          id="start"
+          aria-label="Iniciar o timer"
+          role="button"
+        >
+          <span class="sr-only">Iniciar</span>
+        </button>
+        <button
+          onclick="pausar()"
+          type="button"
+          id="pause"
+          aria-label="Pausar o timer"
+          role="button"
+        >
+          <span class="sr-only">Pausar</span>
+        </button>
+        <button
+          onclick="reset()"
+          type="button"
+          id="reset"
+          aria-label="Resetar o timer"
+          role="button"
+        >
+          <span class="sr-only">Reset</span>
+        </button>
       </div>
       <div id="period"><h2 id="status">Ciclo: N/A Modo: N/A</h2></div>
     </div>

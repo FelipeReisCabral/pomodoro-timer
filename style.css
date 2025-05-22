@@ -11,22 +11,27 @@ div#body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
   border-radius: 20px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.507);
   text-align: center;
-  background-color: rgb(186, 190, 190);
-  height: 40vh;
-  width: 40vh;
+  background-color: #e0e0e0;
+  padding: 20px;
+  height: auto;
+  width: 90vw;
+  max-width: 400px;
 }
 
 div#timer {
   font-family: "Orbitron", sans-serif;
-  font-size: x-large;
+  font-size: 2rem;
 }
 
 button {
-  width: 60px;
-  height: 60px;
+  width: 15vw;
+  max-width: 60px;
+  height: 15vw;
+  max-height: 60px;
   background-size: 60%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -49,6 +54,33 @@ button {
   background-image: url("img/reset.png");
 }
 
-#button :hover {
-  background-color: black;
+button:hover {
+  filter: brightness(90%);
+}
+
+button:focus {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@media (max-width: 400px) {
+  button {
+    width: 50px;
+    height: 50px;
+  }
+
+  div#timer {
+    font-size: large;
+  }
 }
