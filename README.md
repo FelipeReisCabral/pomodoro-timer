@@ -1,4 +1,4 @@
-# ⏱️ Pomodoro Timer - Sistema de Estudos com Metodologias Ágeis
+# ⏱️ Pomodoro Timer - Sistema de Estudos
 
 Este é um aplicativo web para auxiliar nos estudos utilizando o **método Pomodoro**, com controle de tempo, ciclos de foco e descanso, inspirado também em técnicas como **Focus Tree** e **Sistema Leitner**.
 Este projeto nasceu da necessidade de eu empregar métodos conhecidos à minha rotina de estudo para melhorar a aprendizagem de forma eficiente.
