@@ -11,11 +11,13 @@ function iniciar() {
   if (intervalo) return;
   atualizarCicloModo();
   atualizarDisplay();
+  salvarEstado();
 
   intervalo = setInterval(function () {
     if (tempo > 0) {
       tempo--;
       atualizarDisplay();
+      salvarEstado();
     } else {
       clearInterval(intervalo);
       intervalo = null;
@@ -33,7 +35,7 @@ function iniciar() {
       }
       atualizarCicloModo();
       atualizarDisplay();
-
+      salvarEstado();
       iniciar();
     }
   }, 1000);
@@ -52,11 +54,15 @@ function reset() {
   ciclo = 1;
   emFoco = true;
 
-  atualizarCicloModo();
-  atualizarDisplay();
+  const fundo = document.querySelector("#body");
+  fundo.classList.remove("focus", "pause");
 
+  atualizarDisplay();
   document.querySelector("#contador").textContent = "00:25:00";
-  document.querySelector("#body").style.backgroundColor = null;
+
+  const status = document.querySelector("#status");
+  status.textContent = "Ciclo: N/A Modo: N/A";
+  localStorage.removeItem("pomodoroEstado");
 }
 
 function atualizarDisplay() {
@@ -79,9 +85,69 @@ function atualizarCicloModo() {
 
   status.textContent = `Ciclo: ${ciclo} Modo: ${emFoco ? "FOCO" : "PAUSA"}`;
 
-  if (emFoco) {
-    fundo.style.backgroundColor = "lightgreen";
+  fundo.classList.remove("focus", "pause");
+  fundo.classList.add(emFoco ? "focus" : "pause");
+}
+
+function aplicarTema() {
+  const toggleBtn = document.querySelector("#toggle-theme");
+  const tema = localStorage.getItem("tema") || "light";
+  if (tema === "dark") {
+    document.body.classList.add("dark-mode");
+    toggleBtn.textContent = "☀️";
   } else {
-    fundo.style.backgroundColor = "lightblue";
+    document.body.classList.remove("dark-mode");
+    toggleBtn.textContent = "🌙";
+  }
+  toggleBtn.setAttribute("aria-pressed", tema === "dark");
+}
+
+document.querySelector("#toggle-theme").addEventListener("click", () => {
+  const body = document.body;
+  const toggleBtn = document.querySelector("#toggle-theme");
+
+  toggleBtn.classList.add("animando");
+
+  setTimeout(() => {
+    body.classList.toggle("dark-mode");
+    const novoTema = body.classList.contains("dark-mode") ? "dark" : "light";
+    localStorage.setItem("tema", novoTema);
+
+    toggleBtn.textContent = novoTema === "dark" ? "☀️" : "🌙";
+    toggleBtn.setAttribute("aria-pressed", novoTema === "dark");
+
+    toggleBtn.classList.remove("animando");
+    toggleBtn.blur();
+  }, 200);
+});
+
+function salvarEstado() {
+  const estado = {
+    ciclo,
+    periodo,
+    tempo,
+    emFoco,
+  };
+  localStorage.setItem("pomodoroEstado", JSON.stringify(estado));
+}
+
+function restaurarEstado() {
+  const estadoSalvo = localStorage.getItem("pomodoroEstado");
+  if (estadoSalvo) {
+    const {
+      ciclo: c,
+      periodo: p,
+      tempo: t,
+      emFoco: f,
+    } = JSON.parse(estadoSalvo);
+    ciclo = c;
+    periodo = p;
+    tempo = t;
+    emFoco = f;
+    atualizarCicloModo();
+    atualizarDisplay();
   }
 }
+
+aplicarTema();
+restaurarEstado();

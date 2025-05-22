@@ -8,12 +8,16 @@ Diante dessa necessidade, esse projeto foi idealizado também para praticar conc
 
 ## ✅ Funcionalidades atuais
 
-- ⏱️ Timer com tempo de foco (25 min) e pausa (5 min)
+- ⏱️ Timer com tempo padrão de foco (25 min) e pausa (5 min)
 - 🔁 Alternância automática entre ciclos de foco e pausa
 - 🔔 Alerta sonoro ao final de cada período
 - 🔄 Exibição do ciclo atual e modo ativo (FOCO ou PAUSA)
+- 💾 Salvamento automático do estado atual no `localStorage`
+- ♻️ Restauração automática do estado salvo ao recarregar a página
+- 🧹 Limpeza do estado salvo ao resetar o timer
+- 🌗 Alternância entre **modo claro e escuro**, com persistência
 - 🎨 Interface visual responsiva e agradável
-- ♿️ Melhorias de acessibilidade com foco em conformidade com WCAG
+- ♿️ Acessibilidade com `aria-*`, suporte a teclado e compatibilidade com WCAG
 - 📱 Compatível com dispositivos móveis
 
 ---
@@ -27,9 +31,11 @@ Diante dessa necessidade, esse projeto foi idealizado também para praticar conc
 ## 🚧 Próximas melhorias (Backlog)
 
 - 📊 Estatísticas de produtividade por sessão e por dia
-- 🌙 Modo escuro (Dark Mode)
 - 🔄 Contador de ciclos completados
+- ⚙️ Personalização do tempo de foco e pausa
+- 🆘 Botão de ajuda explicando o método Pomodoro
 - 📚 Integração com Sistema Leitner para revisão espaçada
+- 🌳 Integração com Focus Tree
 - ☁️ Hospedagem online (GitHub Pages ou Vercel)
 
 ---
@@ -39,6 +45,8 @@ Diante dessa necessidade, esse projeto foi idealizado também para praticar conc
 - HTML5
 - CSS3
 - JavaScript (ES6+)
+- `localStorage` para persistência de dados
+- Áudio (alerta sonoro)
 
 ---
 
