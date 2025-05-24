@@ -40,6 +40,14 @@ Diante dessa necessidade, esse projeto foi idealizado também para praticar conc
 
 ---
 
+## ☁️ Hospedagem Online
+
+O projeto está disponível online para acesso rápido e testes no link:
+
+➡️ [Pomodoro Timer no Vercel](https://pomodoro-timer-five-azure.vercel.app/)
+
+---
+
 ## 🚀 Tecnologias Utilizadas
 
 - HTML5
