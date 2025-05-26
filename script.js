@@ -149,5 +149,47 @@ function restaurarEstado() {
   }
 }
 
+const helpButton = document.querySelector("#help-button");
+
+helpButton.addEventListener("click", () => {
+  if (document.querySelector("#help-popup")) return;
+
+  const popup = document.createElement("div");
+  popup.id = "help-popup";
+  popup.className = "popup";
+
+  popup.innerHTML = `
+  <h2>O que é o método Pomodoro?</h2>
+
+    <p>
+      O método Pomodoro é uma técnica de gestão de tempo criada para melhorar seu foco e produtividade. Ele funciona em ciclos de trabalho e pausa que ajudam o cérebro a manter a concentração e evitar a fadiga.
+    </p>
+
+    <h3>⏱️ Como usar:</h3>
+    <ol>
+      <li>Escolha uma tarefa para estudar ou trabalhar.</li>
+      <li>Inicie o cronômetro e foque por <strong>25 minutos</strong> (um "Pomodoro").</li>
+      <li>Faça uma <strong>pausa curta de 5 minutos</strong> quando o tempo acabar.</li>
+      <li>A cada 4 Pomodoros, faça uma <strong>pausa maior de 15 a 30 minutos</strong>.</li>
+    </ol>
+
+    <h3>💡 Por que funciona?</h3>
+    <ul>
+      <li>Melhora a <strong>concentração</strong> e reduz distrações.</li>
+      <li>Incentiva o uso consciente do tempo.</li>
+      <li>Divide tarefas grandes em partes menores.</li>
+      <li>Reduz o cansaço mental com pausas frequentes.</li>
+    </ul>
+
+    <button id="close-help" aria-label="Fechar ajuda"></button>
+  `;
+  document.body.appendChild(popup);
+
+  const closeButton = document.querySelector("#close-help");
+  closeButton.addEventListener("click", () => {
+    popup.remove();
+  });
+});
+
 aplicarTema();
 restaurarEstado();

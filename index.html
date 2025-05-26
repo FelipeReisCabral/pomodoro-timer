@@ -12,14 +12,20 @@
   </head>
   <body>
     <div id="body">
-      <button
-        id="toggle-theme"
-        aria-label="Alternar tema"
-        aria-pressed="false"
-        role="switch"
-      >
-        🌙
-      </button>
+      <div class="button-group">
+        <button id="help-button" aria-label="Ajuda - O que é o Método Pomodoro">
+          ❓
+        </button>
+        <button
+          id="toggle-theme"
+          aria-label="Alternar tema"
+          aria-pressed="false"
+          role="switch"
+        >
+          🌙
+        </button>
+      </div>
+
       <div id="title"><h1>Pomodoro Timer</h1></div>
       <div id="timer"><h1 id="contador">00:25:00</h1></div>
       <div id="button">
