@@ -13,16 +13,30 @@
   <body>
     <div id="body">
       <div class="button-group">
-        <button id="help-button" aria-label="Ajuda - O que é o Método Pomodoro">
-          ❓
+        <button
+          class="icon-button"
+          id="config-button"
+          aria-label="Ajuda - O que é o Método Pomodoro"
+        >
+          <img src="./img/config.png" alt="configuracao" />
         </button>
+
+        <button
+          id="help-button"
+          class="icon-button"
+          aria-label="Ajuda - O que é o Método Pomodoro"
+        >
+          <img src="./img/ajuda.png" alt="ajuda" />
+        </button>
+
         <button
           id="toggle-theme"
+          class="icon-button"
           aria-label="Alternar tema"
           aria-pressed="false"
           role="switch"
         >
-          🌙
+          <img src="./img/dark.png" alt="modo escuro" id="theme-icon" />
         </button>
       </div>
 
