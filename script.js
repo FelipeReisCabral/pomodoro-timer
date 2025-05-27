@@ -90,14 +90,17 @@ function atualizarCicloModo() {
 }
 
 function aplicarTema() {
-  const toggleBtn = document.querySelector("#toggle-theme");
+  const themeIcon = document.querySelector("#theme-icon");
   const tema = localStorage.getItem("tema") || "light";
+
   if (tema === "dark") {
     document.body.classList.add("dark-mode");
-    toggleBtn.textContent = "☀️";
+    themeIcon.src = "./img/light.png";
+    themeIcon.alt = "modo claro";
   } else {
     document.body.classList.remove("dark-mode");
-    toggleBtn.textContent = "🌙";
+    themeIcon.src = "./img/dark.png";
+    themeIcon.alt = "modo escuro";
   }
   toggleBtn.setAttribute("aria-pressed", tema === "dark");
 }
@@ -105,6 +108,7 @@ function aplicarTema() {
 document.querySelector("#toggle-theme").addEventListener("click", () => {
   const body = document.body;
   const toggleBtn = document.querySelector("#toggle-theme");
+  const themeIcon = document.querySelector("#theme-icon");
 
   toggleBtn.classList.add("animando");
 
@@ -113,7 +117,9 @@ document.querySelector("#toggle-theme").addEventListener("click", () => {
     const novoTema = body.classList.contains("dark-mode") ? "dark" : "light";
     localStorage.setItem("tema", novoTema);
 
-    toggleBtn.textContent = novoTema === "dark" ? "☀️" : "🌙";
+    themeIcon.src = novoTema === "dark" ? "./img/light.png" : "./img/dark.png";
+    themeIcon.alt = novoTema === "dark" ? "modo claro" : "modo escuro";
+
     toggleBtn.setAttribute("aria-pressed", novoTema === "dark");
 
     toggleBtn.classList.remove("animando");
@@ -187,6 +193,67 @@ helpButton.addEventListener("click", () => {
 
   const closeButton = document.querySelector("#close-help");
   closeButton.addEventListener("click", () => {
+    popup.remove();
+  });
+});
+
+const configButton = document.querySelector("#config-button");
+
+configButton.addEventListener("click", () => {
+  if (document.querySelector("#config-popup")) return;
+
+  const popup = document.createElement("div");
+  popup.id = "config-popup";
+  popup.className = "popup";
+
+  popup.innerHTML = `
+  <h2> ⚙️ Configuração dos Periodos. </h2>
+
+  <label for="focus-time">⌛ Tempo de foco (minutos):</label>
+  <input id="focus-time" type="number" min="1" max="60" value="${foco}" /></br>
+
+  <label for="pause-time">⌛ Tempo de pausa (minutos):</label>
+  <input id="pause-time" type="number" min="1" max="60" value="${pausa}" /></br>
+
+  <button id="save-config"></button>
+  <button id="close-config" aria-label="Fechar configurações"></button>
+  `;
+
+  document.body.appendChild(popup);
+
+  const closeBtn = popup.querySelector("#close-config");
+  const saveBtn = popup.querySelector("#save-config");
+  const focusInput = popup.querySelector("#focus-time");
+  const pauseInput = popup.querySelector("#pause-time");
+
+  closeBtn.addEventListener("click", () => {
+    popup.remove();
+  });
+
+  saveBtn.addEventListener("click", () => {
+    const novoFoco = parseInt(focusInput.value);
+    const novoPausa = parseInt(pauseInput.value);
+
+    if (
+      isNaN(novoFoco) ||
+      novoFoco < 1 ||
+      novoFoco > 60 ||
+      isNaN(novoPausa) ||
+      novoPausa < 1 ||
+      novoPausa > 60
+    ) {
+      alert("Valores inválidos. Informe números entre 1 e 60.");
+      return;
+    }
+
+    foco = novoFoco;
+    pausa = novoPausa;
+
+    tempo = (periodo === "foco" ? foco : pausa) * 60;
+
+    atualizarDisplay();
+    atualizarCicloModo();
+    salvarEstado();
     popup.remove();
   });
 });
