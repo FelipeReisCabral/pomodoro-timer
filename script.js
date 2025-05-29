@@ -1,11 +1,17 @@
 let intervalo;
 let foco = 25;
 let pausa = 5;
+let pausaLonga = false;
 let periodo = "foco";
 let tempo = foco * 60;
 let ciclo = 1;
 let emFoco = true;
+let cycleCount = 0;
+let longBreakDuration = 15 * 60;
 const alerta = new Audio("sounds/beep.mp3");
+document.addEventListener("DOMContentLoaded", () => {
+  alerta.load();
+});
 
 function iniciar() {
   if (intervalo) return;
@@ -24,9 +30,17 @@ function iniciar() {
       alerta.play();
 
       if (periodo === "foco") {
-        periodo = "pausa";
-        emFoco = false;
-        tempo = pausa * 60;
+        cycleCount++;
+        if (cycleCount % 4 === 0) {
+          periodo = "pausa";
+          emFoco = false;
+          tempo = longBreakDuration;
+          pausaLonga = true;
+        } else {
+          periodo = "pausa";
+          emFoco = false;
+          tempo = pausa * 60;
+        }
       } else {
         emFoco = true;
         periodo = "foco";
@@ -36,7 +50,7 @@ function iniciar() {
       atualizarCicloModo();
       atualizarDisplay();
       salvarEstado();
-      iniciar();
+      setTimeout(() => iniciar(), 1000);
     }
   }, 1000);
 }
@@ -53,12 +67,14 @@ function reset() {
   tempo = foco * 60;
   ciclo = 1;
   emFoco = true;
+  cycleCount = 0;
+  pausaLonga = false;
 
   const fundo = document.querySelector("#body");
   fundo.classList.remove("focus", "pause");
 
   atualizarDisplay();
-  document.querySelector("#contador").textContent = "00:25:00";
+  atualizarCicloModo();
 
   const status = document.querySelector("#status");
   status.textContent = "Ciclo: N/A Modo: N/A";
@@ -67,15 +83,10 @@ function reset() {
 
 function atualizarDisplay() {
   let timer = document.querySelector("#contador");
-  let hr = Math.floor(tempo / 3600);
-  let min = Math.floor((tempo % 3600) / 60);
+  let min = Math.floor(tempo / 60);
   let seg = tempo % 60;
   let contadorFormatado =
-    (hr < 10 ? "0" + hr : hr) +
-    ":" +
-    (min < 10 ? "0" + min : min) +
-    ":" +
-    (seg < 10 ? "0" + seg : seg);
+    (min < 10 ? "0" + min : min) + ":" + (seg < 10 ? "0" + seg : seg);
   timer.textContent = contadorFormatado;
 }
 
@@ -83,7 +94,12 @@ function atualizarCicloModo() {
   const status = document.querySelector("#status");
   const fundo = document.querySelector("#body");
 
-  status.textContent = `Ciclo: ${ciclo} Modo: ${emFoco ? "FOCO" : "PAUSA"}`;
+  if (pausaLonga) {
+    status.textContent = "PAUSA LONGA";
+  } else {
+    let modoTexto = emFoco ? "FOCO" : "PAUSA";
+    status.textContent = `Ciclo: ${ciclo} Modo: ${modoTexto}`;
+  }
 
   fundo.classList.remove("focus", "pause");
   fundo.classList.add(emFoco ? "focus" : "pause");
@@ -91,6 +107,7 @@ function atualizarCicloModo() {
 
 function aplicarTema() {
   const themeIcon = document.querySelector("#theme-icon");
+  const toggleBtn = document.querySelector("#toggle-theme");
   const tema = localStorage.getItem("tema") || "light";
 
   if (tema === "dark") {
@@ -133,6 +150,7 @@ function salvarEstado() {
     periodo,
     tempo,
     emFoco,
+    cycleCount,
   };
   localStorage.setItem("pomodoroEstado", JSON.stringify(estado));
 }
@@ -145,11 +163,14 @@ function restaurarEstado() {
       periodo: p,
       tempo: t,
       emFoco: f,
+      cycleCount: cc,
     } = JSON.parse(estadoSalvo);
     ciclo = c;
     periodo = p;
     tempo = t;
     emFoco = f;
+    cycleCount = cc || 0;
+    pausaLonga = periodo === "pausa" && cycleCount % 4 === 0;
     atualizarCicloModo();
     atualizarDisplay();
   }
@@ -208,15 +229,20 @@ configButton.addEventListener("click", () => {
 
   popup.innerHTML = `
   <h2> ⚙️ Configuração dos Periodos. </h2>
-
+  <h3>
   <label for="focus-time">⌛ Tempo de foco (minutos):</label>
   <input id="focus-time" type="number" min="1" max="60" value="${foco}" /></br>
 
   <label for="pause-time">⌛ Tempo de pausa (minutos):</label>
   <input id="pause-time" type="number" min="1" max="60" value="${pausa}" /></br>
 
-  <button id="save-config"></button>
-  <button id="close-config" aria-label="Fechar configurações"></button>
+  <label for="long-break-time">⌛ Tempo da pausa longa (minutos):</label>
+  <input id="long-break-time" type="number" min="1" max="60" value="${
+    longBreakDuration / 60
+  }" /></br></h3>
+
+  <button id="save-config" aria-label="salvar configurações"></button>
+  <button id="close-config" aria-label="fechar configurações"></button>
   `;
 
   document.body.appendChild(popup);
@@ -225,6 +251,7 @@ configButton.addEventListener("click", () => {
   const saveBtn = popup.querySelector("#save-config");
   const focusInput = popup.querySelector("#focus-time");
   const pauseInput = popup.querySelector("#pause-time");
+  const longBreakInput = popup.querySelector("#long-break-time");
 
   closeBtn.addEventListener("click", () => {
     popup.remove();
@@ -233,6 +260,7 @@ configButton.addEventListener("click", () => {
   saveBtn.addEventListener("click", () => {
     const novoFoco = parseInt(focusInput.value);
     const novoPausa = parseInt(pauseInput.value);
+    const novoLongBreak = parseInt(longBreakInput.value);
 
     if (
       isNaN(novoFoco) ||
@@ -240,7 +268,10 @@ configButton.addEventListener("click", () => {
       novoFoco > 60 ||
       isNaN(novoPausa) ||
       novoPausa < 1 ||
-      novoPausa > 60
+      novoPausa > 60 ||
+      isNaN(novoLongBreak) ||
+      novoLongBreak < 1 ||
+      novoLongBreak > 60
     ) {
       alert("Valores inválidos. Informe números entre 1 e 60.");
       return;
@@ -248,13 +279,11 @@ configButton.addEventListener("click", () => {
 
     foco = novoFoco;
     pausa = novoPausa;
+    longBreakDuration = novoLongBreak * 60;
 
-    tempo = (periodo === "foco" ? foco : pausa) * 60;
-
-    atualizarDisplay();
-    atualizarCicloModo();
-    salvarEstado();
+    reset();
     popup.remove();
+    alert("Configurações Atualizadas com sucesso!");
   });
 });
 
