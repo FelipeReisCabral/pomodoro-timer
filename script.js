@@ -70,11 +70,11 @@ function reset() {
   cycleCount = 0;
   pausaLonga = false;
 
-  const fundo = document.querySelector("#body");
-  fundo.classList.remove("focus", "pause");
-
   atualizarDisplay();
   atualizarCicloModo();
+
+  const fundo = document.querySelector("#body");
+  fundo.classList.remove("focus", "pause");
 
   const status = document.querySelector("#status");
   status.textContent = "Ciclo: N/A Modo: N/A";
