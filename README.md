@@ -8,10 +8,14 @@ Diante dessa necessidade, esse projeto foi idealizado também para praticar conc
 
 ## ✅ Funcionalidades atuais
 
-- ⏱️ Timer com tempo padrão de foco (25 min) e pausa (5 min)
+- ⏱️ Timer com tempo padrão de foco (25 min), pausa (5 min) e pausa longa (15 min)
+- ⚙️ Personalização do tempo de foco, pausa e pausa longa
+- 🆘 Botão de ajuda explicando o método Pomodoro
+- 🔄 Contador de ciclos completados
+- ⏸️ Pausa Longa implementada a cada 4 ciclos completos de foco
 - 🔁 Alternância automática entre ciclos de foco e pausa
 - 🔔 Alerta sonoro ao final de cada período
-- 🔄 Exibição do ciclo atual e modo ativo (FOCO ou PAUSA)
+- 🔄 Exibição do ciclo atual e modo ativo (FOCO, PAUSA e PAUSA LONGA)
 - 💾 Salvamento automático do estado atual no `localStorage`
 - ♻️ Restauração automática do estado salvo ao recarregar a página
 - 🧹 Limpeza do estado salvo ao resetar o timer
@@ -19,7 +23,7 @@ Diante dessa necessidade, esse projeto foi idealizado também para praticar conc
 - 🎨 Interface visual responsiva e agradável
 - ♿️ Acessibilidade com `aria-*`, suporte a teclado e compatibilidade com WCAG
 - 📱 Compatível com dispositivos móveis
-
+- ☁️ Hospedagem online (GitHub Pages ou Vercel)
 ---
 
 ## 🧪 Exemplo da Interface
@@ -31,12 +35,8 @@ Diante dessa necessidade, esse projeto foi idealizado também para praticar conc
 ## 🚧 Próximas melhorias (Backlog)
 
 - 📊 Estatísticas de produtividade por sessão e por dia
-- 🔄 Contador de ciclos completados
-- ⚙️ Personalização do tempo de foco e pausa
-- 🆘 Botão de ajuda explicando o método Pomodoro
 - 📚 Integração com Sistema Leitner para revisão espaçada
 - 🌳 Integração com Focus Tree
-- ☁️ Hospedagem online (GitHub Pages ou Vercel)
 
 ---
 
